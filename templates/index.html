@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Text Summarizer</title>
+    <style>
+        .container {
+            width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            display: block;
+            margin: 20px auto;
+        }
+
+
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #input-text,
+        #summarized-text {
+            width: 450px;
+            height: 200px;
+            resize: none;
+            border-radius: 5px;
+        }
+
+        .length-container {
+            margin-top: 20px;
+        }
+
+        .length-box {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .language-menu {
+            margin-top: 10px;
+        }
+
+        #language {
+            width: 100%;
+        }
+
+        #summarize-button {
+            display: block;
+            margin: 30px auto;
+            width: 20%;
+            background-color: #065F51;
+            color: white;
+            padding: 10px 10px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+    
+
+    
+
+    </div>
+
+    <div class="length-container">
+        <button class="length-button" value="25">25%</button>
+        <button class="length-button" value="50">50%</button>
+        <button class="length-button" value="75">75%</button>
+        <div class="length-box" id="length-box">Selected Length: 50%</div>
+    </div>
+
+    <div class="language-menu">
+        <select id="language">
+            <option value="en">English</option>
+            <option value="vi">Vietnamese</option>
+        </select>
+    </div>
+
+    <button >Summarize</button> -->
+    <div class="container">
+        <h1>Text Summarizer</h1>
+        
+        <form action="{{url_for('Summarize')}}" method="post">
+            <div class="input-group">
+                <textarea id="input-text" name="data" placeholder="Enter your data" required="required" cols="30"
+                rows="10">{{previous}}</textarea>
+                <textarea  id="summarized-text" name="result" cols="30" rows="10">{{result}}</textarea>
+            </div>
+            <input type="range" class="m-2" min="10" max="75" name="maxL" value ="50">
+            <div class="language-menu">
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="vi">Vietnamese</option>
+                </select>
+            </div>
+            <button id="summarize-button" type="submit">Submit</button>
+        </form>
+
+        <p>{{data_size}}<br>{{output_size}}<br>{{percent}}</p>
+    </div>
+    <script>
+        const lengthButtons = document.querySelectorAll(".length-button");
+        const lengthBox = document.getElementById("length-box");
+
+        lengthButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                let percentage = button.value;
+                lengthBox.innerText = `Selected Length: ${percentage}%`;
+            });
+        });
+
+    </script>
+</body>
+
+</html>

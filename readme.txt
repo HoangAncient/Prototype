@@ -1,0 +1,1 @@
+để chạy file thì ctrl-shift-f vào dự án và nhập lệnh flask run 
