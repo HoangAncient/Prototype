@@ -60,32 +60,15 @@
             text-align: center;
             border-radius: 25px;
         }
+
+        .summaryLength{
+            margin-top: 20px;
+        }
     </style>
 </head>
 
 <body>
-    <!-- 
-    
 
-    
-
-    </div>
-
-    <div class="length-container">
-        <button class="length-button" value="25">25%</button>
-        <button class="length-button" value="50">50%</button>
-        <button class="length-button" value="75">75%</button>
-        <div class="length-box" id="length-box">Selected Length: 50%</div>
-    </div>
-
-    <div class="language-menu">
-        <select id="language">
-            <option value="en">English</option>
-            <option value="vi">Vietnamese</option>
-        </select>
-    </div>
-
-    <button >Summarize</button> -->
     <div class="container">
         <h1>Text Summarizer</h1>
         
@@ -95,30 +78,20 @@
                 rows="10">{{previous}}</textarea>
                 <textarea  id="summarized-text" name="result" cols="30" rows="10">{{result}}</textarea>
             </div>
-            <input type="range" class="m-2" min="10" max="75" name="maxL" value ="50">
-            <div class="language-menu">
-                <select id="language">
-                    <option value="en">English</option>
-                    <option value="vi">Vietnamese</option>
-                </select>
+            
+            
+            <div class="summaryLength">
+                <span><b>Summary length:</b>Short</span>
+                <input type="range" class="m-2" min="6" max="32" name="maxL" value ="{{maxSize}}">
+                <span>Long</span>
             </div>
+        
             <button id="summarize-button" type="submit">Submit</button>
         </form>
 
         <p>{{data_size}}<br>{{output_size}}<br>{{percent}}</p>
     </div>
-    <script>
-        const lengthButtons = document.querySelectorAll(".length-button");
-        const lengthBox = document.getElementById("length-box");
-
-        lengthButtons.forEach(button => {
-            button.addEventListener("click", function () {
-                let percentage = button.value;
-                lengthBox.innerText = `Selected Length: ${percentage}%`;
-            });
-        });
-
-    </script>
+    
 </body>
-
+    <script></script>
 </html>

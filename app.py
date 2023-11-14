@@ -11,14 +11,15 @@ def Index():
 def Summarize():
     if req.method=="POST":
         
-        API_URL = "https://api-inference.huggingface.co/models/HuyHNG/autotrain-1_flan-99948147515"
-        headers = {"Authorization": "Bearer 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"}
+        API_URL = "https://api-inference.huggingface.co/models/marianna13/flan-t5-base-summarization"
+        headers = {"Authorization": "Bearer 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"}
 
         # API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
         # headers = {"Authorization": "Bearer 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"}
         data=req.form["data"]
-
+        
         percentage = req.form["maxL"]
+        summarySize = int(req.form["maxL"])
         maxL = int(len(data) * int(req.form["maxL"]) / 100)
         minL= int(maxL / 2)
         def query(payload):
@@ -29,9 +30,9 @@ def Summarize():
                 "inputs": data,
                 "parameters": {"do_sample": False, "min_length":minL,"max_length":maxL},
             }
-        )[0]
+        )
 
-        return render_template("index.html", result= output["summary_text"], previous=data, data_size= len(data), output_size = len(output["summary_text"]), percent=percentage)
+        return render_template("index.html", maxSize=summarySize,result= output[0]["summary_text"], previous=data, data_size= len(data), output_size = len(output[0]["summary_text"]), percent=percentage)
     else:
         return render_template("index.html")
 if __name__ == '__main__':
