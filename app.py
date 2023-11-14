@@ -1,6 +1,7 @@
 import requests
 from flask import Flask, render_template, url_for
 from flask import request as req
+from collections import defaultdict
 
 app = Flask(__name__)
 @app.route("/",methods=["GET","POST"])
@@ -28,11 +29,12 @@ def Summarize():
         output = query(
             {
                 "inputs": data,
-                "parameters": {"do_sample": False, "min_length":minL,"max_length":maxL},
+                "parameters": {"min_length":minL,"max_length":maxL},
             }
-        )
+        )[0]
+        
 
-        return render_template("index.html", maxSize=summarySize,result= output["summary_text"], previous=data, data_size= len(data), output_size = len(output["summary_text"]), percent=percentage)
+        return render_template("index.html", maxSize=summarySize,result= output['summary_text'], previous=data, data_size= len(data), output_size = len(output['summary_text']), percent=percentage)
     else:
         return render_template("index.html")
 if __name__ == '__main__':
