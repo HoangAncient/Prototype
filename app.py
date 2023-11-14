@@ -32,7 +32,7 @@ def Summarize():
             }
         )
 
-        return render_template("index.html", maxSize=summarySize,result= output[0]["summary_text"], previous=data, data_size= len(data), output_size = len(output[0]["summary_text"]), percent=percentage)
+        return render_template("index.html", maxSize=summarySize,result= output["summary_text"], previous=data, data_size= len(data), output_size = len(output["summary_text"]), percent=percentage)
     else:
         return render_template("index.html")
 if __name__ == '__main__':
