@@ -1,5 +1,7 @@
 import requests
 from flask import Flask, render_template, url_for
+
+
 from flask import request as req
 from collections import defaultdict
 
@@ -9,14 +11,13 @@ def Index():
     return render_template("index.html")
 
 @app.route("/Summarization",methods=["GET","POST"])
+
 def Summarize():
     if req.method=="POST":
-        
+      
         API_URL = "https://api-inference.huggingface.co/models/marianna13/flan-t5-base-summarization"
         headers = {"Authorization": "Bearer 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"}
-
-        # API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
-        # headers = {"Authorization": "Bearer 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"}
+        
         data=req.form["data"]
         
         percentage = req.form["maxL"]
@@ -34,7 +35,7 @@ def Summarize():
         )[0]
         
 
-        return render_template("index.html", maxSize=summarySize,result= output['summary_text'], previous=data, data_size= len(data), output_size = len(output['summary_text']), percent=percentage)
+        return render_template("index.html", maxSize=summarySize,result= output['summary_text'], previous=data)
     else:
         return 'OK'
 if __name__ == '__main__':
